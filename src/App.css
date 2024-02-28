@@ -12,6 +12,7 @@ body {
   animation: gradient 15s ease infinite;
   min-height: 100vh;
   padding: 30px;
+  border: 1px solid white;
 }
 
 @keyframes gradient {
@@ -29,6 +30,7 @@ body {
 .container {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .container h1 {
@@ -37,4 +39,5 @@ body {
   align-self: center;
   font-size: 3.5rem;
   color: white;
+  border-bottom: 1px solid white;
 }
