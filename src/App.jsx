@@ -11,15 +11,17 @@ function App() {
   const [highScore, setHighScore] = useState(0);
 
   return (
-    <div className='container'>
+    <>
       <Header currentScore={currentScore} highScore={highScore}></Header>
-      {gameState === 'start' && (
-        <StartScreen
-          setDifficulty={setDifficulty}
-          setGameState={setGameState}
-        ></StartScreen>
-      )}
-    </div>
+      <div className='container'>
+        {gameState === 'start' && (
+          <StartScreen
+            setDifficulty={setDifficulty}
+            setGameState={setGameState}
+          ></StartScreen>
+        )}
+      </div>
+    </>
   );
 }
 

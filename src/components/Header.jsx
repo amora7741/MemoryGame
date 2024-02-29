@@ -1,7 +1,7 @@
 function Header({ currentScore, highScore }) {
   return (
     <header>
-      <h2>PokéBraze Memory Match</h2>
+      <h2>Pokémon: Battle Recon Zone</h2>
       <div className='scores'>
         <h2>Current Score: {currentScore}</h2>
         <h2>High Score: {highScore}</h2>
