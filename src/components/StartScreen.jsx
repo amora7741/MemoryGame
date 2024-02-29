@@ -1,6 +1,19 @@
 import Button from './Button';
 
 function StartScreen({ setDifficulty, setGameState }) {
+  const difficulties = ['Easy', 'Medium', 'Hard'];
+
+  const difficultyButtons = difficulties.map((difficulty) => {
+    return (
+      <Button
+        key={difficulty}
+        text={difficulty}
+        setGameState={setGameState}
+        setDifficulty={setDifficulty}
+      ></Button>
+    );
+  });
+
   return (
     <main className='startcard'>
       <div className='info'>
@@ -12,23 +25,7 @@ function StartScreen({ setDifficulty, setGameState }) {
         <p>See how far you can go!</p>
       </div>
       <p>Select your difficulty:</p>
-      <div className='buttons'>
-        <Button
-          text={'Easy'}
-          setGameState={setGameState}
-          setDifficulty={setDifficulty}
-        ></Button>
-        <Button
-          text={'Medium'}
-          setGameState={setGameState}
-          setDifficulty={setDifficulty}
-        ></Button>
-        <Button
-          text={'Hard'}
-          setGameState={setGameState}
-          setDifficulty={setDifficulty}
-        ></Button>
-      </div>
+      <div className='buttons'>{difficultyButtons}</div>
     </main>
   );
 }
