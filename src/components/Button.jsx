@@ -1,5 +1,10 @@
-// function Button({ text }) {
-//   return <button onClick={}>{text}</button>;
-// }
+function Button({ text, setGameState, setDifficulty }) {
+  const handleClick = () => {
+    setGameState('playing');
+    setDifficulty(text);
+  };
 
-// export default Button;
+  return <button onClick={handleClick}>{text}</button>;
+}
+
+export default Button;

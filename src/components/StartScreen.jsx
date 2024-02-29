@@ -1,8 +1,8 @@
-// import Button from './Button';
+import Button from './Button';
 
-function StartScreen({ setgameStatus, setDifficulty }) {
+function StartScreen({ setDifficulty, setGameState }) {
   return (
-    <div className='card'>
+    <main className='card'>
       <div className='info'>
         <h1>Pokémon: Battle Recon Zone</h1>
         <p>Try not to select the same card twice.</p>
@@ -12,8 +12,24 @@ function StartScreen({ setgameStatus, setDifficulty }) {
         <p>See how far you can go!</p>
       </div>
       <p>Select your difficulty:</p>
-      <div className='buttons'>{/* <Button text={'Easy'}></Button> */}</div>
-    </div>
+      <div className='buttons'>
+        <Button
+          text={'Easy'}
+          setGameState={setGameState}
+          setDifficulty={setDifficulty}
+        ></Button>
+        <Button
+          text={'Medium'}
+          setGameState={setGameState}
+          setDifficulty={setDifficulty}
+        ></Button>
+        <Button
+          text={'Hard'}
+          setGameState={setGameState}
+          setDifficulty={setDifficulty}
+        ></Button>
+      </div>
+    </main>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './App.css';
 import StartScreen from './components/StartScreen';
@@ -12,8 +12,8 @@ function App() {
 
   return (
     <>
-      <Header currentScore={currentScore} highScore={highScore}></Header>
       <div className='container'>
+        <Header currentScore={currentScore} highScore={highScore}></Header>
         {gameState === 'start' && (
           <StartScreen
             setDifficulty={setDifficulty}
