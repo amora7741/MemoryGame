@@ -2,7 +2,7 @@ import Button from './Button';
 
 function StartScreen({ setDifficulty, setGameState }) {
   return (
-    <main className='card'>
+    <main className='startcard'>
       <div className='info'>
         <h1>Pokémon: Battle Recon Zone</h1>
         <p>Try not to select the same card twice.</p>

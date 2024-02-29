@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import StartScreen from './components/StartScreen';
 import Header from './components/Header';
+import GameScreen from './components/GameScreen';
 
 function App() {
   const [difficulty, setDifficulty] = useState('');
@@ -20,6 +21,7 @@ function App() {
             setGameState={setGameState}
           ></StartScreen>
         )}
+        {gameState === 'playing' && <GameScreen></GameScreen>}
       </div>
     </>
   );
