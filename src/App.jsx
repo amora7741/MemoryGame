@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import './App.css';
 import StartScreen from './components/StartScreen';
@@ -14,7 +14,7 @@ function App() {
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const fetchRandomCard = async () => {
+  const fetchRandomCard = useCallback(async () => {
     const randomId = Math.floor(Math.random() * 1000) + 1;
 
     const response = await fetch(
@@ -38,9 +38,9 @@ function App() {
       name: data.name,
       imageUrl: imageUrl,
     };
-  };
+  }, []);
 
-  const fetchCards = async () => {
+  const fetchCards = useCallback(async () => {
     try {
       const promises = [];
       for (let i = 0; i < 15; i++) {
@@ -49,24 +49,19 @@ function App() {
 
       const resolvedCards = await Promise.all(promises);
       setCards(resolvedCards);
+      console.log(resolvedCards);
     } catch (error) {
       console.error('Failed to fetch cards: ', error);
     }
-  };
+  }, [fetchRandomCard]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchCards();
-      console.log(cards);
-    };
-
-    fetchData();
-  }, []);
+    fetchCards();
+  }, [fetchCards]);
 
   const handleRetry = () => {
     setGameState('start');
     fetchCards();
-    console.log(cards);
   };
 
   return (
@@ -80,7 +75,12 @@ function App() {
           ></StartScreen>
         )}
         {gameState === 'playing' && (
-          <GameScreen setGameState={setGameState}></GameScreen>
+          <GameScreen
+            setGameState={setGameState}
+            cards={cards}
+            setCurrentScore={setCurrentScore}
+            setHighScore={setHighScore}
+          ></GameScreen>
         )}
       </div>
     </>
