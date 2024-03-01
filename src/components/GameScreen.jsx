@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
+import PokemonCard from './PokemonCard';
 
-function GameScreen({ setGameState, cards }) {
+function GameScreen({ setGameState, cards, setCurrentScore, setHighScore }) {
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -28,7 +29,13 @@ function GameScreen({ setGameState, cards }) {
       variants={container}
       initial='hidden'
       animate='visible'
-    ></motion.main>
+    >
+      {cards.map((card) => (
+        <motion.div key={card.id} variants={item}>
+          <PokemonCard id={card.id} name={card.name} imageUrl={card.imageUrl} />
+        </motion.div>
+      ))}
+    </motion.main>
   );
 }
 
