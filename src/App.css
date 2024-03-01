@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap');
 
 :root {
-  --rounded-corners: 5px;
+  --rounded-corners: 10px;
+  --black-translucent: rgba(0, 0, 0, 0.409);
 }
 
 * {
@@ -34,16 +35,14 @@ body {
 }
 
 .container {
-  display: flex;
+  display: grid;
+  grid-template-rows: 1fr 10fr;
   position: relative;
   align-items: center;
-  justify-content: center;
   height: 100vh;
 }
 
 header {
-  position: absolute;
-  top: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -56,11 +55,15 @@ header {
   line-height: 1.2;
 }
 
+main {
+  justify-self: center;
+}
+
 .startcard {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.409);
+  background-color: var(--black-translucent);
   padding: 30px;
   border-radius: var(--rounded-corners);
   text-align: center;
@@ -76,6 +79,7 @@ button {
   padding: 5px;
   background-color: transparent;
   cursor: pointer;
+  border-radius: var(--rounded-corners);
 }
 
 button:hover {
@@ -89,13 +93,21 @@ button:hover {
   align-items: center;
   max-width: 1100px;
   gap: 3rem;
-  background-color: rgba(0, 0, 0, 0.36);
 }
 
 .pokemoncard {
+  border: 3px solid white;
+  background-color: var(--black-translucent);
   display: flex;
   flex-direction: column;
-  flex: 1 1 15rem;
+  align-items: center;
+  font-size: 1rem;
+  padding: 15px;
+}
+
+.pokemoncard img {
+  width: 100px;
+  height: 100px;
 }
 
 @media (max-width: 606px) {

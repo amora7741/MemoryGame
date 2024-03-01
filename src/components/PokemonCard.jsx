@@ -6,10 +6,9 @@ function PokemonCard({ id, name, imageUrl }) {
   const capitalizedName = capitalizeFirstLetter(name);
 
   return (
-    <div className='pokemoncard'>
-      <img src={imageUrl} alt='' />
-      <h1>{capitalizedName}</h1>
-    </div>
+    <button className='pokemoncard'>
+      <img src={imageUrl} alt='Pokemon' />#{id}
+    </button>
   );
 }
 
