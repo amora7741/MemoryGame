@@ -82,6 +82,22 @@ button:hover {
   transform: translateY(-5px);
 }
 
+.gamecontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 1100px;
+  gap: 3rem;
+  background-color: rgba(0, 0, 0, 0.36);
+}
+
+.pokemoncard {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 15rem;
+}
+
 @media (max-width: 606px) {
   * {
     font-size: 1.1rem;
