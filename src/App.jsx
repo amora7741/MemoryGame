@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { BounceLoader } from 'react-spinners';
 
 import './App.css';
 import StartScreen from './components/StartScreen';
@@ -42,6 +43,7 @@ function App() {
 
   const fetchCards = useCallback(async () => {
     try {
+      setLoading(true);
       const promises = [];
       for (let i = 0; i < 15; i++) {
         promises.push(fetchRandomCard());
@@ -50,6 +52,7 @@ function App() {
       const resolvedCards = await Promise.all(promises);
       setCards(resolvedCards);
       console.log(resolvedCards);
+      setLoading(false);
     } catch (error) {
       console.error('Failed to fetch cards: ', error);
     }
@@ -74,14 +77,17 @@ function App() {
             setGameState={setGameState}
           ></StartScreen>
         )}
-        {gameState === 'playing' && (
-          <GameScreen
-            setGameState={setGameState}
-            cards={cards}
-            setCurrentScore={setCurrentScore}
-            setHighScore={setHighScore}
-          ></GameScreen>
-        )}
+        {gameState === 'playing' &&
+          (loading ? (
+            <BounceLoader color='#fff' />
+          ) : (
+            <GameScreen
+              setGameState={setGameState}
+              cards={cards}
+              setCurrentScore={setCurrentScore}
+              setHighScore={setHighScore}
+            ></GameScreen>
+          ))}
       </div>
     </>
   );
