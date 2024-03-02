@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MoonLoader } from 'react-spinners';
 
 import './App.css';
@@ -15,7 +15,7 @@ function App() {
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const fetchCards = useCallback(async () => {
+  const fetchCards = async () => {
     try {
       setLoading(true);
       const uniqueIds = new Set();
@@ -50,11 +50,11 @@ function App() {
     } catch (error) {
       alert(`Failed to fetch cards: ${error}`);
     }
-  }, []);
+  };
 
   useEffect(() => {
     fetchCards();
-  }, [fetchCards]);
+  }, []);
 
   const handleRetry = () => {
     setGameState('start');
