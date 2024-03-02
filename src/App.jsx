@@ -76,6 +76,7 @@ function App() {
             <MoonLoader color='#fff' />
           ) : (
             <GameScreen
+              difficulty={difficulty}
               setGameState={setGameState}
               cards={cards}
               currentScore={currentScore}

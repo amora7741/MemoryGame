@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import PokemonCard from './PokemonCard';
 
 function GameScreen({
+  difficulty,
   setGameState,
   cards,
   currentScore,
@@ -47,6 +48,25 @@ function GameScreen({
     },
   };
 
+  const cardsToDisplay = useMemo(() => {
+    let numCards;
+    switch (difficulty) {
+      case 'Easy':
+        numCards = 5;
+        break;
+      case 'Medium':
+        numCards = 10;
+        break;
+      case 'Hard':
+      default:
+        numCards = 15;
+        break;
+    }
+
+    console.log(numCards);
+    return cards.slice(0, numCards);
+  }, [cards, difficulty]);
+
   return (
     <motion.main
       className='gamecontainer'
@@ -54,7 +74,7 @@ function GameScreen({
       initial='hidden'
       animate='visible'
     >
-      {cards.map((card) => (
+      {cardsToDisplay.map((card) => (
         <motion.div key={card.id} variants={item}>
           <PokemonCard
             id={card.id}
