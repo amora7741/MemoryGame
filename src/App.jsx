@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { BounceLoader } from 'react-spinners';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { MoonLoader } from 'react-spinners';
 
 import './App.css';
 import StartScreen from './components/StartScreen';
@@ -15,48 +15,42 @@ function App() {
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const fetchRandomCard = useCallback(async () => {
-    const randomId = Math.floor(Math.random() * 1000) + 1;
-
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${randomId}`
-    );
-    const data = await response.json();
-
-    let imageUrl;
-
-    if (data.sprites.other.dream_world.front_default) {
-      imageUrl = data.sprites.other.dream_world.front_default;
-    } else if (data.sprites.front_default) {
-      imageUrl = data.sprites.front_default;
-    } else {
-      imageUrl =
-        'https://thumbs.dreamstime.com/b/no-pokemon-here-sign-riga-latvia-july-restricted-area-over-white-background-go-very-popular-virtual-74549871.jpg';
-    }
-
-    return {
-      id: data.id,
-      name: data.name,
-      imageUrl: imageUrl,
-    };
-  }, []);
-
   const fetchCards = useCallback(async () => {
     try {
       setLoading(true);
-      const promises = [];
-      for (let i = 0; i < 15; i++) {
-        promises.push(fetchRandomCard());
-      }
+      const uniqueIds = new Set();
+      let randomId;
+
+      do {
+        randomId = Math.floor(Math.random() * 1000) + 1;
+        uniqueIds.add(randomId);
+      } while (uniqueIds.has(randomId) && uniqueIds.size < 15);
+
+      const promises = Array.from(uniqueIds).map((id) =>
+        fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response) =>
+          response.json()
+        )
+      );
 
       const resolvedCards = await Promise.all(promises);
-      setCards(resolvedCards);
-      console.log(resolvedCards);
+      const cardsData = resolvedCards.map((data) => {
+        let imageUrl =
+          data.sprites.other.dream_world.front_default ||
+          data.sprites.front_default ||
+          'https://thumbs.dreamstime.com/b/no-pokemon-here-sign-riga-latvia-july-restricted-area-over-white-background-go-very-popular-virtual-74549871.jpg';
+        return {
+          id: data.id,
+          name: data.name,
+          imageUrl: imageUrl,
+        };
+      });
+
+      setCards(cardsData);
       setLoading(false);
     } catch (error) {
-      console.error('Failed to fetch cards: ', error);
+      alert(`Failed to fetch cards: ${error}`);
     }
-  }, [fetchRandomCard]);
+  }, []);
 
   useEffect(() => {
     fetchCards();
@@ -79,7 +73,7 @@ function App() {
         )}
         {gameState === 'playing' &&
           (loading ? (
-            <BounceLoader color='#fff' />
+            <MoonLoader color='#fff' />
           ) : (
             <GameScreen
               setGameState={setGameState}

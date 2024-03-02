@@ -59,6 +59,10 @@ main {
   justify-self: center;
 }
 
+.container > span {
+  justify-self: center;
+}
+
 .startcard {
   display: flex;
   flex-direction: column;
@@ -101,7 +105,6 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1rem;
   padding: 15px;
 }
 
