@@ -2,6 +2,15 @@ import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import PokemonCard from './PokemonCard';
 
+function shuffleArray(array) {
+  const shuffled = array.slice();
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 function GameScreen({
   difficulty,
   setGameState,
@@ -12,21 +21,6 @@ function GameScreen({
   setHighScore,
 }) {
   const [clickedCards, setClickedCards] = useState({});
-
-  const handleCardClick = (cardId) => {
-    if (clickedCards[cardId]) {
-      setGameState('gameover');
-    } else {
-      setClickedCards({ ...clickedCards, [cardId]: true });
-
-      const newScore = currentScore + 1;
-      setCurrentScore(newScore);
-
-      if (newScore > highScore) {
-        setHighScore(newScore);
-      }
-    }
-  };
 
   const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -63,9 +57,27 @@ function GameScreen({
         break;
     }
 
-    console.log(numCards);
     return cards.slice(0, numCards);
   }, [cards, difficulty]);
+
+  const [shuffledCards, setShuffledCards] = useState(cardsToDisplay);
+
+  const handleCardClick = (cardId) => {
+    if (clickedCards[cardId]) {
+      setGameState('gameover');
+    } else {
+      setClickedCards({ ...clickedCards, [cardId]: true });
+
+      const newScore = currentScore + 1;
+      setCurrentScore(newScore);
+
+      if (newScore > highScore) {
+        setHighScore(newScore);
+      }
+
+      setShuffledCards(shuffleArray(shuffledCards));
+    }
+  };
 
   return (
     <motion.main
@@ -74,7 +86,7 @@ function GameScreen({
       initial='hidden'
       animate='visible'
     >
-      {cardsToDisplay.map((card) => (
+      {shuffledCards.map((card) => (
         <motion.div key={card.id} variants={item}>
           <PokemonCard
             id={card.id}
