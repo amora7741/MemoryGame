@@ -5,6 +5,7 @@ import './App.css';
 import StartScreen from './components/StartScreen';
 import Header from './components/Header';
 import GameScreen from './components/GameScreen';
+import GameOver from './components/GameOver';
 
 function App() {
   const [difficulty, setDifficulty] = useState('');
@@ -12,7 +13,7 @@ function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [cards, setCards] = useState([]);
-  const [result, setResult] = useState('');
+  const [playerWon, setPlayerWon] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const fetchCards = async () => {
@@ -58,6 +59,8 @@ function App() {
 
   const handleRetry = () => {
     setGameState('start');
+    setCurrentScore(0);
+    setPlayerWon(false);
     fetchCards();
   };
 
@@ -83,8 +86,12 @@ function App() {
               setCurrentScore={setCurrentScore}
               highScore={highScore}
               setHighScore={setHighScore}
+              setPlayerWon={setPlayerWon}
             ></GameScreen>
           ))}
+        {gameState === 'gameover' && (
+          <GameOver playerWon={playerWon} handleRetry={handleRetry}></GameOver>
+        )}
       </div>
     </>
   );

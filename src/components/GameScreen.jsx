@@ -19,6 +19,7 @@ function GameScreen({
   setCurrentScore,
   highScore,
   setHighScore,
+  setPlayerWon,
 }) {
   const [clickedCards, setClickedCards] = useState({});
 
@@ -66,7 +67,8 @@ function GameScreen({
     if (clickedCards[cardId]) {
       setGameState('gameover');
     } else {
-      setClickedCards({ ...clickedCards, [cardId]: true });
+      const updatedClickedCards = { ...clickedCards, [cardId]: true };
+      setClickedCards(updatedClickedCards);
 
       const newScore = currentScore + 1;
       setCurrentScore(newScore);
@@ -76,6 +78,11 @@ function GameScreen({
       }
 
       setShuffledCards(shuffleArray(shuffledCards));
+
+      if (Object.keys(updatedClickedCards).length === shuffledCards.length) {
+        setGameState('gameover');
+        setPlayerWon(true);
+      }
     }
   };
 
