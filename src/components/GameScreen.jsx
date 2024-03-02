@@ -1,8 +1,32 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import PokemonCard from './PokemonCard';
 
-function GameScreen({ setGameState, cards, setCurrentScore, setHighScore }) {
+function GameScreen({
+  setGameState,
+  cards,
+  currentScore,
+  setCurrentScore,
+  highScore,
+  setHighScore,
+}) {
+  const [clickedCards, setClickedCards] = useState({});
+
+  const handleCardClick = (cardId) => {
+    if (clickedCards[cardId]) {
+      setGameState('gameover');
+    } else {
+      setClickedCards({ ...clickedCards, [cardId]: true });
+
+      const newScore = currentScore + 1;
+      setCurrentScore(newScore);
+
+      if (newScore > highScore) {
+        setHighScore(newScore);
+      }
+    }
+  };
+
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -32,7 +56,12 @@ function GameScreen({ setGameState, cards, setCurrentScore, setHighScore }) {
     >
       {cards.map((card) => (
         <motion.div key={card.id} variants={item}>
-          <PokemonCard id={card.id} name={card.name} imageUrl={card.imageUrl} />
+          <PokemonCard
+            id={card.id}
+            name={card.name}
+            imageUrl={card.imageUrl}
+            onCardClick={() => handleCardClick(card.id)}
+          />
         </motion.div>
       ))}
     </motion.main>

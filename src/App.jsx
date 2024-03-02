@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MoonLoader } from 'react-spinners';
 
 import './App.css';
@@ -78,7 +78,9 @@ function App() {
             <GameScreen
               setGameState={setGameState}
               cards={cards}
+              currentScore={currentScore}
               setCurrentScore={setCurrentScore}
+              highScore={highScore}
               setHighScore={setHighScore}
             ></GameScreen>
           ))}

@@ -97,6 +97,7 @@ button:hover {
   align-items: center;
   max-width: 1100px;
   gap: 3rem;
+  padding: 15px;
 }
 
 .pokemoncard {
