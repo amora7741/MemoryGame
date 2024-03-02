@@ -5,7 +5,7 @@ import PikaL from '../assets/pikachul.gif';
 
 function GameOver({ playerWon, handleRetry }) {
   const picsrc = playerWon ? PikaDub : PikaL;
-  const result = playerWon ? 'You Won! :3' : 'You Lost :(';
+  const result = playerWon ? 'You Won! :D' : 'You Lost :(';
 
   return (
     <motion.main
