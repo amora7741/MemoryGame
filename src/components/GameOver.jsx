@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import PikaDub from '../assets/pikachudub.gif';
 import PikaL from '../assets/pikachul.gif';
 
-function GameOver({ playerWon, handleRetry }) {
+function GameOver({ playerWon, handleNewGame, handleRetry }) {
   const picsrc = playerWon ? PikaDub : PikaL;
   const result = playerWon ? 'You Won! :D' : 'You Lost :(';
 
@@ -15,6 +15,10 @@ function GameOver({ playerWon, handleRetry }) {
     >
       <h1>{result}</h1>
       <img src={picsrc} alt='' />
+      <div className='buttons'>
+        <button onClick={handleNewGame}>Main Menu</button>
+        <button onClick={handleRetry}>Retry</button>
+      </div>
     </motion.main>
   );
 }

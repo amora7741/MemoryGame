@@ -57,11 +57,16 @@ function App() {
     fetchCards();
   }, []);
 
-  const handleRetry = () => {
+  const handleNewGame = () => {
     setGameState('start');
     setCurrentScore(0);
     setPlayerWon(false);
     fetchCards();
+  };
+
+  const handleRetry = () => {
+    setGameState('playing');
+    setCurrentScore(0);
   };
 
   return (
@@ -90,7 +95,11 @@ function App() {
             ></GameScreen>
           ))}
         {gameState === 'gameover' && (
-          <GameOver playerWon={playerWon} handleRetry={handleRetry}></GameOver>
+          <GameOver
+            playerWon={playerWon}
+            handleNewGame={handleNewGame}
+            handleRetry={handleRetry}
+          ></GameOver>
         )}
       </div>
     </>

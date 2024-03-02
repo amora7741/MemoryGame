@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button';
+import { motion } from 'framer-motion';
 
 function StartScreen({ setDifficulty, setGameState }) {
   const difficulties = ['Easy', 'Medium', 'Hard'];
@@ -16,7 +17,11 @@ function StartScreen({ setDifficulty, setGameState }) {
   });
 
   return (
-    <main className='startcard'>
+    <motion.main
+      className='startcard'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <div className='info'>
         <h1>Pokémon: Battle Recon Zone</h1>
         <p>Try not to select the same card twice.</p>
@@ -27,7 +32,7 @@ function StartScreen({ setDifficulty, setGameState }) {
       </div>
       <p>Select your difficulty:</p>
       <div className='buttons'>{difficultyButtons}</div>
-    </main>
+    </motion.main>
   );
 }
 
