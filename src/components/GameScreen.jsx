@@ -93,6 +93,16 @@ function GameScreen({
     }
   };
 
+  const renderCard = (card) => (
+    <PokemonCard
+      key={card.id}
+      id={card.id}
+      name={card.name}
+      imageUrl={card.imageUrl}
+      onCardClick={() => handleCardClick(card.id)}
+    />
+  );
+
   return (
     <>
       {shouldRenderSwiper ? (
@@ -103,14 +113,7 @@ function GameScreen({
           centeredSlides={true}
         >
           {shuffledCards.map((card) => (
-            <SwiperSlide key={card.id}>
-              <PokemonCard
-                id={card.id}
-                name={card.name}
-                imageUrl={card.imageUrl}
-                onCardClick={() => handleCardClick(card.id)}
-              />
-            </SwiperSlide>
+            <SwiperSlide key={card.id}>{renderCard(card)}</SwiperSlide>
           ))}
         </Swiper>
       ) : (
@@ -122,12 +125,7 @@ function GameScreen({
         >
           {shuffledCards.map((card) => (
             <motion.div key={card.id} variants={item}>
-              <PokemonCard
-                id={card.id}
-                name={card.name}
-                imageUrl={card.imageUrl}
-                onCardClick={() => handleCardClick(card.id)}
-              />
+              {renderCard(card)}
             </motion.div>
           ))}
         </motion.main>
