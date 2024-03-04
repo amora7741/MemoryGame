@@ -148,7 +148,7 @@ button:hover {
 
 @media (max-width: 606px) {
   * {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 
   header > h2 {
