@@ -17,7 +17,7 @@ function GameOver({ playerWon, handleNewGame, handleRetry }) {
       <img src={picsrc} alt='' />
       <div className='buttons'>
         <button onClick={handleNewGame}>Main Menu</button>
-        <button onClick={handleRetry}>Retry</button>
+        {!playerWon && <button onClick={handleRetry}>Retry</button>}
       </div>
     </motion.main>
   );
