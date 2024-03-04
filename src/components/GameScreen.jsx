@@ -93,42 +93,47 @@ function GameScreen({
     }
   };
 
-  return shouldRenderSwiper ? (
-    <Swiper
-      spaceBetween={10}
-      loop={true}
-      slidesPerView={3}
-      centeredSlides={true}
-    >
-      {shuffledCards.map((card) => (
-        <SwiperSlide key={card.id}>
-          <PokemonCard
-            id={card.id}
-            name={card.name}
-            imageUrl={card.imageUrl}
-            onCardClick={() => handleCardClick(card.id)}
-          />
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  ) : (
-    <motion.main
-      className='gamecontainer'
-      variants={container}
-      initial='hidden'
-      animate='visible'
-    >
-      {shuffledCards.map((card) => (
-        <motion.div key={card.id} variants={item}>
-          <PokemonCard
-            id={card.id}
-            name={card.name}
-            imageUrl={card.imageUrl}
-            onCardClick={() => handleCardClick(card.id)}
-          />
-        </motion.div>
-      ))}
-    </motion.main>
+  return (
+    <>
+      {shouldRenderSwiper ? (
+        <Swiper
+          spaceBetween={10}
+          loop={true}
+          slidesPerView={3}
+          centeredSlides={true}
+        >
+          {shuffledCards.map((card) => (
+            <SwiperSlide key={card.id}>
+              <PokemonCard
+                id={card.id}
+                name={card.name}
+                imageUrl={card.imageUrl}
+                onCardClick={() => handleCardClick(card.id)}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        <motion.main
+          className='gamecontainer'
+          variants={container}
+          initial='hidden'
+          animate='visible'
+        >
+          {shuffledCards.map((card) => (
+            <motion.div key={card.id} variants={item}>
+              <PokemonCard
+                id={card.id}
+                name={card.name}
+                imageUrl={card.imageUrl}
+                onCardClick={() => handleCardClick(card.id)}
+              />
+            </motion.div>
+          ))}
+        </motion.main>
+      )}
+      <h1>Don't click the same card twice!</h1>
+    </>
   );
 }
 

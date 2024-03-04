@@ -4,9 +4,11 @@
 
 .swiper-slide {
   opacity: 0.1;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
+  scale: 0.8;
 }
 
 .swiper-slide-active {
   opacity: 1;
+  scale: 1;
 }
