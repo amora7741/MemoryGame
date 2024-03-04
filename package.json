@@ -15,7 +15,8 @@
     "react-dom": "^18.2.0",
     "react-responsive": "^9.0.2",
     "react-spinners": "^0.13.8",
-    "swiper": "^11.0.7"
+    "swiper": "^11.0.7",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
