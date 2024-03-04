@@ -2,6 +2,12 @@ import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import PokemonCard from './PokemonCard';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { useMediaQuery } from 'react-responsive';
+
+import 'swiper/css';
+import '../styles/slider.css';
+
 function shuffleArray(array) {
   const shuffled = array.slice();
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -22,6 +28,7 @@ function GameScreen({
   setPlayerWon,
 }) {
   const [clickedCards, setClickedCards] = useState({});
+  const shouldRenderSwiper = useMediaQuery({ query: '(max-width: 450px)' });
 
   const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -86,7 +93,25 @@ function GameScreen({
     }
   };
 
-  return (
+  return shouldRenderSwiper ? (
+    <Swiper
+      spaceBetween={10}
+      loop={true}
+      slidesPerView={3}
+      centeredSlides={true}
+    >
+      {shuffledCards.map((card) => (
+        <SwiperSlide key={card.id}>
+          <PokemonCard
+            id={card.id}
+            name={card.name}
+            imageUrl={card.imageUrl}
+            onCardClick={() => handleCardClick(card.id)}
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  ) : (
     <motion.main
       className='gamecontainer'
       variants={container}

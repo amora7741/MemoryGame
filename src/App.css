@@ -142,7 +142,7 @@ button:hover {
 
 @media (max-width: 606px) {
   * {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 
   header > h2 {
@@ -155,6 +155,15 @@ button:hover {
 
   .scores {
     text-align: center;
+  }
+
+  .endscreen {
+    width: 100%;
+    background-color: transparent;
+  }
+
+  .endscreen img {
+    max-width: 250px;
   }
 }
 

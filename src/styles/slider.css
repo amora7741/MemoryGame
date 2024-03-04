@@ -1,0 +1,12 @@
+.swiper {
+  max-width: 100%;
+}
+
+.swiper-slide {
+  opacity: 0.1;
+  transition: opacity 0.3s ease;
+}
+
+.swiper-slide-active {
+  opacity: 1;
+}
