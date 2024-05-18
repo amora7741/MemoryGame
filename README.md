@@ -10,6 +10,6 @@ This memory game utilizes the PokeAPI in order to fetch a few Pokemon along with
 * Clone the repository using `git clone`
 * `cd` into the MemoryGame directory
 * Run `npm i` to install the required dependencies
-* Run `npm run dev` to start the project and navigate to `http://localhost:3000` to see the project in action 
+* Run `npm run dev` to start the project and navigate to `http://localhost:5173` to see the project in action 
 
 <img width="1440" alt="image" src="https://github.com/amora7741/MemoryGame/assets/104049707/7f578b53-5e04-47f4-94a4-316486623460">
