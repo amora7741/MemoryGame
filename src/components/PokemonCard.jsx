@@ -9,10 +9,14 @@ function capitalizeFirstLetter(string) {
 
 function PokemonCard({ id, name, imageUrl, onCardClick }) {
   const capitalizedName = capitalizeFirstLetter(name);
-  const [play] = useSound(pokemonButtonClick);
+  const [play] = useSound(pokemonButtonClick, { volume: 0.025 });
 
   return (
-    <button className='pokemoncard' onClick={onCardClick} onMouseEnter={play}>
+    <button
+      className='pokemoncard'
+      onClick={onCardClick}
+      onMouseEnter={() => play()}
+    >
       <img src={imageUrl} alt={`Pokemon ${capitalizedName}`} />#{id}
     </button>
   );
